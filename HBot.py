@@ -40,7 +40,7 @@ async def get_links(client, message):
 
 	if fh in anime:
 		html = urlopen(anime)
-		soup = BeautifulSoup(html.read(), 'html5lib')
+		soup = BeautifulSoup(html.read(), 'html.parser')
 		links = [a["href"] for a in soup.findAll("a", {"title": "mega"})]
 
 		buttons = []
