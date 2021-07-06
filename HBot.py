@@ -60,7 +60,7 @@ async def get_links(client, message):
 @app.on_callback_query(filters.regex(r"^episode (?P<number>\d+)"))
 async def keyboard_dl(client, callback):
 	number = callback.matches[0]['number']
-	link = links[number-1]
+	link = links[int(number)-1]
 	await client.send_message(user, "Aguarde, seu episódio será enviado em breve...")
 	download(link, "/downloads", str(number))
 	upload(str(number))
@@ -69,10 +69,10 @@ async def keyboard_dl(client, callback):
 
 @app.on_callback_query(filters.regex(r"^download all"))
 async def downloadAll(client, callback):
-	i=0
+	index=0
 	await client.send_message(user, "Aguarde, seus episódios serão enviados em breve...")
 	for link in links:
-		i =+ 1
+		index =+ 1
 		download(link, "/downloads", str(i))
 		upload(str(i))
 	await client.send_message(user, "Sucesso!")
